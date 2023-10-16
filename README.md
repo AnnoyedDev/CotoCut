@@ -15,8 +15,11 @@ brain
 
 French 
 
+#**Git clone or download the release because github convert line return, if you download as zip it does not convert back to windows line return --"**
 
 # How to Use
+
+
 Put your mpls and m2ts in the same directory.
 
 mpls and m2ts but have the same name (i.e: 000.m2ts 000.mpls)
