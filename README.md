@@ -13,6 +13,7 @@
 ## Comment utiliser
 
 1. Placez `CotoCut.bat` dans le même répertoire que votre fichier `.m2ts`
+
     Note: Vous pouvez télécharger la dernière version via https://github.com/AnnoyedDev/CotoCut/releases/latest
 2. Déplacez votre fichier `.mpls` dans le même répertoire que `CotoCut.bat` et votre `.m2ts`
 3. Exécutez `CotoCut.bat`.
