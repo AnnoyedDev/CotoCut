@@ -50,7 +50,7 @@ set current_chapter=%start_chapter%
 set /p count="Nombre de chapitres pour l'épisode !episode!, Chapitre actuel : !current_chapter! ("aide" = à la selection du chapitre | "retour" = Menu principal) ^> "
 set helpselection="loop"
 if "%count%"=="aide" goto preview_mode
-if "%count%"=="%retour%" goto chapter_select
+if "%count%"=="retour" goto chapter_select
 if not defined count goto end_script
 
 :: Trouver le timestamp de fin
