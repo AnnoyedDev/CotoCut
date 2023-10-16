@@ -13,7 +13,7 @@ eac3to !file_number!.mpls chapters.txt
 
 :: Demander à partir de quel chapitre commencer
 :chapter_select
-set /p start_chapter="A partir de quel chapitre voulez-vous commencer (Vide = défaut | "aide" = aide à la selection du chapître)? "
+set /p start_chapter="A partir de quel chapitre voulez-vous commencer (Vide = défaut | "aide" = à la selection du chapître)? "
 set helpselection="debut"
 if "%start_chapter%"=="aide" goto preview_mode
 if not defined start_chapter set start_chapter=1
@@ -47,16 +47,14 @@ set current_chapter=%start_chapter%
 
 :: Boucle principale
 :main_loop
-set /p count="Nombre de chapitres pour l'épisode episode !episode! ("aide" = aide à la selection du chapitre) ^> "
+set /p count="Nombre de chapitres pour l'épisode !episode!, Chapitre actuel : !current_chapter! ("aide" = à la selection du chapitre | "retour" = Menu principal) ^> "
 set helpselection="loop"
 if "%count%"=="aide" goto preview_mode
+if "%count%"=="%retour%" goto chapter_select
 if not defined count goto end_script
 
-:: Nécessaire pour avoir la fin du bon chapitre
-set /a count = count+1
-
 :: Trouver le timestamp de fin
-set /a target_chapter=current_chapter+count-1
+set /a target_chapter=current_chapter+count
 set /a index=1
 for /f "tokens=2 delims==" %%a in (%chapters_file%) do (
     if !index! EQU !target_chapter! (
@@ -73,7 +71,7 @@ for %%a in (%audio_streams%) do (
 )
 
 :: Découper le fichier vidéo avec les pistes audio sélectionnées
-echo Decoupage de l'episode avec les chapitres de !start_time! a !end_time!
+echo Decoupage de l'episode !episode! avec les chapitres !current_chapter!^-^>!target_chapter! de !start_time! a !end_time!
 ffmpeg -i "%input_file%" -ss !start_time! -to !end_time! !map_args! -c copy "output_episode_!episode!.m2ts"
 
 :: Mettre à jour le timestamp de départ et les compteurs pour le prochain segment
