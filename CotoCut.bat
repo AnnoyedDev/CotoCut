@@ -52,6 +52,9 @@ set helpselection="loop"
 if "%count%"=="aide" goto preview_mode
 if not defined count goto end_script
 
+:: Nécessaire pour avoir la fin du bon chapitre
+set /a count = count+1
+
 :: Trouver le timestamp de fin
 set /a target_chapter=current_chapter+count-1
 set /a index=1
