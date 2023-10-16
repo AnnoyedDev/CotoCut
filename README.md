@@ -15,7 +15,7 @@ brain
 
 French 
 
-#**Git clone or download the release because github convert line return, if you download as zip it does not convert back to windows line return --"**
+# **Git clone or download the release because github convert line return, if you download as zip it does not convert back to windows line return --"**
 
 # How to Use
 
