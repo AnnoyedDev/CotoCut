@@ -12,8 +12,10 @@ set chapters_file=chapters.txt
 eac3to !file_number!.mpls chapters.txt
 
 :: Demander à partir de quel chapitre commencer
-set /p start_chapter="A partir de quel chapitre voulez-vous commencer (Vide = défaut | 6942^= aide à la selection du chapître)? "
-if "%start_chapter%"=="6942" goto preview_mode
+:chapter_select
+set /p start_chapter="A partir de quel chapitre voulez-vous commencer (Vide = défaut | "aide" = aide à la selection du chapître)? "
+set helpselection="debut"
+if "%start_chapter%"=="aide" goto preview_mode
 if not defined start_chapter set start_chapter=1
 
 :: Détection des pistes audio
@@ -45,7 +47,9 @@ set current_chapter=%start_chapter%
 
 :: Boucle principale
 :main_loop
-set /p count="Nombre de chapitres pour l'épisode episode !episode! ^> "
+set /p count="Nombre de chapitres pour l'épisode episode !episode! ("aide" = aide à la selection du chapitre) ^> "
+set helpselection="loop"
+if "%count%"=="aide" goto preview_mode
 if not defined count goto end_script
 
 :: Trouver le timestamp de fin
@@ -76,11 +80,16 @@ set /a episode+=1
 
 goto main_loop
 
+:return_helper
+if "%helpselection%"=="loop" goto main_loop
+if "%helpselection%"=="debut" goto chapter_selec
+goto chapter_select
+
 :preview_mode
 :: Demande du numéro du chapitre à prévisualiser
-set /p preview_chapter="Entrez le numéro du chapitre que vous souhaitez prévisualiser (6942 pour revenir en arrière) : "
+set /p preview_chapter="Entrez le numéro du chapitre que vous souhaitez prévisualiser ("retour" pour revenir en arrière) : "
 
-if "%preview_chapter%"=="6942" goto chapter_select
+if "%preview_chapter%"=="retour" goto return_helper
 
 :: Trouver le timestamp de début pour le chapitre de prévisualisation
 set /a index=1
