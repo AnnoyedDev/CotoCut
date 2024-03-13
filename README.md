@@ -1,6 +1,7 @@
 # CotoCut
 
 `CotoCut` est un script conçus pour découper des fichiers vidéo `.m2ts` en fonction des chapitres définis dans un fichier `chapters.txt` généra automatiquement par le script (via eac3to) via le fichier de chapitre `.mpls`.
+Si vous souhaitez utiliser la version Python, lancez le .py
 
 ## Prérequis
 
